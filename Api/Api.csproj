@@ -72,6 +72,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
@@ -89,6 +90,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Filters\RateLimitFilterAttribute.cs" />
     <Compile Include="Helpers\RequestLimitHelper.cs" />
+    <Compile Include="Controllers\SearchHotelsController.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Helpers\ConfigHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />

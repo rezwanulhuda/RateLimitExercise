@@ -8,7 +8,7 @@ namespace Api
 		public static KeyLimitTracker GlobalTracker = null;
 		static RequestLimitHelper()
 		{
-			GlobalTracker = new KeyLimitTracker(1, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+			GlobalTracker = new KeyLimitTracker(ConfigHelper.DefaultNrOfRequests, ConfigHelper.DefaultAllowedTime, ConfigHelper.DefaultSuspendTime);
 		}
 	}
 }

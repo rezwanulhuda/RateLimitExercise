@@ -1,16 +1,28 @@
 ﻿using System;
-using System.Web.Mvc;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http.Filters;
 
 namespace Api
 {
+	[AttributeUsage(validOn:AttributeTargets.Class, AllowMultiple = false)]
 	public class RateLimitFilterAttribute : ActionFilterAttribute
 	{
-		public override void OnActionExecuting(ActionExecutingContext filterContext)
+		public override void OnActionExecuting(System.Web.Http.Controllers.HttpActionContext actionContext)
 		{
-			base.OnActionExecuting(filterContext);
+			base.OnActionExecuting(actionContext);
 
-			string key = filterContext.RouteData.Values["key"] as string;
-			RequestLimitHelper.GlobalTracker.Track(key);
+			string key = actionContext.RequestContext.RouteData.Values["key"] as string;
+			try
+			{
+				RequestLimitHelper.GlobalTracker.Track(key);
+			}
+			catch(Exception ex)
+			{
+				var resp = actionContext.Request.CreateResponse((System.Net.HttpStatusCode)429, ex.Message);
+				actionContext.Response = resp;
+			}
+
 		}
 	}
 }

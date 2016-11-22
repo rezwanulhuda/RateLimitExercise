@@ -11,7 +11,7 @@ namespace Lib
 
 		Dictionary<string, LimitCounter> items = new Dictionary<string, LimitCounter>();
 
-		private static Object locker;
+		private static object locker = new object();
 
 		public void Track(string key)
 		{

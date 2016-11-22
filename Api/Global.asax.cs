@@ -12,7 +12,8 @@ namespace Api
 			//AreaRegistration.RegisterAllAreas();
 			GlobalConfiguration.Configure(WebApiConfig.Register);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
-			GlobalFilters.Filters.Add(new RateLimitFilterAttribute());
+			GlobalConfiguration.Configuration.Filters.Add(new RateLimitFilterAttribute());
+
 		}
 	}
 }
