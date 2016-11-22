@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LimitCounterTest.cs" />
+    <Compile Include="KeyLimitTrackerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

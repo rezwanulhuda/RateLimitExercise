@@ -31,24 +31,28 @@ namespace Lib
 				firstRequest = DateTime.Now;
 			}
 
-			if (this.CurrentCount >= this.nrOfRequests)
+			var diff = DateTime.Now.Subtract(firstRequest).Seconds;
+
+			if (diff >= allowedTime.Seconds)
 			{
-				var diff = DateTime.Now.Subtract(firstRequest).Seconds;
-				var next = allowedTime.Add(this.suspendedFor).Seconds;
-				if (diff >= next)
+				if (this.CurrentCount > this.nrOfRequests && diff < allowedTime.Add(this.suspendedFor).Seconds)
+				{
+					throw new Exception(String.Format("Limit of {0} requests exceeded.", this.nrOfRequests));
+				}
+				else 
 				{
 					this.CurrentCount = 0;
 					firstRequest = DateTime.Now;
 				}
-				else 
+
+			}
+			else
+			{
+				if (this.CurrentCount >= this.nrOfRequests)
 				{
 					throw new Exception(String.Format("Limit of {0} requests exceeded.", this.nrOfRequests));
 				}
-
-
 			}
-				
-
 
 			this.CurrentCount++;
 		}
