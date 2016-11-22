@@ -31,11 +31,11 @@ namespace Lib
 				firstRequest = DateTime.Now;
 			}
 
-			var diff = DateTime.Now.Subtract(firstRequest).Seconds;
+			var diff = DateTime.Now.Subtract(firstRequest).TotalSeconds;
 
-			if (diff >= allowedTime.Seconds)
+			if (diff >= allowedTime.TotalSeconds)
 			{
-				if (this.CurrentCount > this.nrOfRequests && diff < allowedTime.Add(this.suspendedFor).Seconds)
+				if (this.CurrentCount >= this.nrOfRequests && diff < allowedTime.Add(this.suspendedFor).TotalSeconds)
 				{
 					throw new Exception(String.Format("Limit of {0} requests exceeded.", this.nrOfRequests));
 				}

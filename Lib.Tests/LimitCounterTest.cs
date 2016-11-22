@@ -76,7 +76,7 @@ namespace Lib.Tests
 			LimitCounter counter = new LimitCounter(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(secondsSuspended));
 
 			counter.Increase();
-			System.Threading.Thread.Sleep(1000);
+			System.Threading.Thread.Sleep(2000);
 			counter.Increase();
 		}
 
@@ -125,10 +125,50 @@ namespace Lib.Tests
 			{
 			}
 
-			System.Threading.Thread.Sleep(1000);
+			System.Threading.Thread.Sleep(2000);
 
 			counter.Increase();
 			Assert.AreEqual(1, counter.CurrentCount);
+
+		}
+
+
+
+		[Test()]
+		public void Increase_WhenLimitAtPar_AllowsAfterWaitTime()
+		{
+			int nrOfRequests = 2;
+			int allowedTime = 1;
+			int secondsSuspended = 5;
+
+			LimitCounter counter = new LimitCounter(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(secondsSuspended));
+
+			counter.Increase();
+			counter.Increase();
+			try
+			{
+				counter.Increase();
+				Assert.Fail("did not throw");
+			}
+			catch
+			{
+			}
+
+			System.Threading.Thread.Sleep(3000);
+
+			try
+			{
+				counter.Increase();
+				Assert.Fail("Did not throw");
+			}
+			catch
+			{
+			}
+
+			//System.Threading.Thread.Sleep(1000);
+
+			//counter.Increase();
+			//Assert.AreEqual(1, counter.CurrentCount);
 
 		}
 
