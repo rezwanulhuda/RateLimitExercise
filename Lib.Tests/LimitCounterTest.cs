@@ -53,15 +53,9 @@ namespace Lib.Tests
 			{
 				counter.Increase();
 				Assert.Fail("Did not throw exception");
-			}
-			catch (NUnit.Framework.AssertionException e)
-			{
-				throw e;
-			}
-			catch (Exception ex)
-			{
-				
-				Assert.AreEqual(String.Format("Limit of {0} requests exceeded.", 1), ex.Message);
+			}			
+			catch (RateLimitExceededException)
+			{				
 			}
 		}
 
@@ -128,21 +122,21 @@ namespace Lib.Tests
 				counter.Increase();
 				Assert.Fail("Did not throw first time");
 			}
-			catch
-			{
-			}
+            catch (RateLimitExceededException)
+            {
+            }
 
-			System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(1000);
 			try
 			{
 				counter.Increase();
 				Assert.Fail("Did not throw second time");
 			}
-			catch
-			{
-			}
+            catch (RateLimitExceededException)
+            {
+            }
 
-			System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(2000);
 
 			counter.Increase();
 			Assert.AreEqual(1, counter.CurrentCount);
@@ -167,27 +161,27 @@ namespace Lib.Tests
 				counter.Increase();
 				Assert.Fail("did not throw");
 			}
-			catch
-			{
-			}
+            catch (RateLimitExceededException)
+            {
+            }
 
-			System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(3000);
 
 			try
 			{
 				counter.Increase();
 				Assert.Fail("Did not throw");
 			}
-			catch
-			{
-			}
+            catch (RateLimitExceededException)
+            {
+            }
 
-			//System.Threading.Thread.Sleep(1000);
+            //System.Threading.Thread.Sleep(1000);
 
-			//counter.Increase();
-			//Assert.AreEqual(1, counter.CurrentCount);
+            //counter.Increase();
+            //Assert.AreEqual(1, counter.CurrentCount);
 
-		}
+        }
 
 
 	}

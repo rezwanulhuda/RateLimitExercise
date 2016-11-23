@@ -43,7 +43,7 @@ namespace Lib
                 {
                     if (limitExceeded && timeNow.Subtract(lastRequest).TotalSeconds < suspendedFor.TotalSeconds)
                     {
-                        throw new Exception(String.Format("Limit of {0} requests exceeded.", this.nrOfRequests));
+                        throw new RateLimitExceededException(this.nrOfRequests, suspendedFor.Subtract(DateTime.Now.Subtract(lastRequest)));
                     }
                     else
                     {
@@ -56,9 +56,12 @@ namespace Lib
                 {
                     if (this.CurrentCount >= this.nrOfRequests)
                     {
-                        limitExceeded = true;
-                        lastRequest = DateTime.Now;
-                        throw new Exception(String.Format("Limit of {0} requests exceeded.", this.nrOfRequests));                        
+                        if (!limitExceeded)
+                        {
+                            limitExceeded = true;
+                            lastRequest = DateTime.Now;
+                        }                        
+                        throw new RateLimitExceededException(nrOfRequests, suspendedFor.Subtract(DateTime.Now.Subtract(lastRequest)));                        
                     }
                 }
             }
