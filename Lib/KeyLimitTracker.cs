@@ -32,10 +32,12 @@ namespace Lib
 			{
 				lock(locker)
 				{
-					var counter = new LimitCounter(this.nrOfRequests, this.defaultAllowedTime, this.defaultSuspendUntil);
-					items.Add(key, counter);
+                    if (!items.ContainsKey(key))
+                    {
+                        var counter = new LimitCounter(this.nrOfRequests, this.defaultAllowedTime, this.defaultSuspendUntil);
+                        items.Add(key, counter);
+                    }                        
 				}
-
 			}
 		}
 

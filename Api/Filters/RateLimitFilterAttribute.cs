@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lib;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
@@ -17,7 +18,7 @@ namespace Api
 			{
 				RequestLimitHelper.GlobalTracker.Track(key);
 			}
-			catch(Exception ex)
+			catch(RateLimitExceededException ex)
 			{
 				var resp = actionContext.Request.CreateResponse((System.Net.HttpStatusCode)429, ex.Message);
 				actionContext.Response = resp;

@@ -13,7 +13,7 @@ namespace Api.Controllers
 		[HttpGet]
 		[Route("search/{city}/{sort}")]
 		public IHttpActionResult SearchHotels(string city, string sort)
-		{
+		{            
 			return Ok(String.Format("Hello Rate Limited world...{0}, {1}", city, sort));
 		}
     }
