@@ -1,6 +1,7 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{94343749-D209-49C0-9A83-87E5BF8829F1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{857B6797-8076-4124-9B94-4F3A56307C6D}"
@@ -31,5 +32,8 @@ Global
 		{5E210B10-02B1-47FE-9A37-C052F41F7C5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E210B10-02B1-47FE-9A37-C052F41F7C5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E210B10-02B1-47FE-9A37-C052F41F7C5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

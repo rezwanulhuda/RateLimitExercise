@@ -22,7 +22,7 @@ namespace Lib.Tests
 		}
 
 		[Test()]
-		public void Increase_IncreasesCounterBy1()
+		public void Increase_IncreasesCurrentCounterBy1()
 		{
 			int nrOfRequests = 1;
 			int allowedTime = 1;
@@ -65,7 +65,24 @@ namespace Lib.Tests
 			}
 		}
 
-		[Test()]
+        [Test()]
+        public void Increase_WhenLimitDidNotExceed_ResetsCounterAfterElapsedTime()
+        {
+            int nrOfRequests = 1;
+            int allowedTime = 1;
+            int secondsSuspended = 1;
+
+            //nrOfRequests, seconds, minutesSuspended
+            LimitCounter counter = new LimitCounter(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(secondsSuspended));
+
+            counter.Increase();
+            System.Threading.Thread.Sleep(1000);
+            counter.Increase();
+            Assert.AreEqual(1, counter.CurrentCount);
+        }
+
+
+        [Test()]
 		public void Increase_WhenLimitExceeds_AllowsRequestAfterElapsedTime()
 		{
 			int nrOfRequests = 1;
