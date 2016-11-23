@@ -69,10 +69,7 @@ namespace Lib
 		}
 
 		public override ILimitCounterState Next()
-		{
-			var timeNow = DateTime.Now;
-			var diff = timeNow.Subtract(this.stateStart).TotalSeconds;
-
+		{			
 			if (!this.Expired())
 			{
 				if (this.CurrentCount >= this.limit)
@@ -118,10 +115,7 @@ namespace Lib
 		}
 
 		public override ILimitCounterState Next()
-		{
-			var timeNow = DateTime.Now;
-			var diff = timeNow.Subtract(this.stateStart).TotalSeconds;
-
+		{			
 			if (this.Expired())
 			{				
 				return this.statefactory.GetNewValidState();
