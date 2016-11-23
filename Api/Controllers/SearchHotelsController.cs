@@ -17,7 +17,7 @@ namespace Api.Controllers
         {
             this.dataStore = dataStore;
         }
-		[HttpGet]
+		[HttpGet]        
 		[Route("search/{city}/{sort}")]
 		public IHttpActionResult SearchHotels(string city, string sort)
 		{
