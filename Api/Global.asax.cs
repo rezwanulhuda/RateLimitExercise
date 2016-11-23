@@ -5,6 +5,7 @@ using System.Web.Http;
 using System.Reflection;
 using System.IO;
 using Api.Helpers;
+using Api.Configuration;
 
 namespace Api
 {
@@ -13,8 +14,7 @@ namespace Api
 		protected void Application_Start()
 		{
             //AreaRegistration.RegisterAllAreas();
-            
-            
+
             
             
             GlobalConfiguration.Configure(WebApiConfig.Register);

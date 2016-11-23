@@ -34,7 +34,7 @@ namespace Lib
 				{
                     if (!items.ContainsKey(key))
                     {
-                        var counter = new LimitCounter(this.nrOfRequests, this.defaultAllowedTime, this.defaultSuspendUntil);
+                        var counter = new LimitCounter(nrOfRequests, allowedTime, suspendUntil);
                         items.Add(key, counter);
                     }                        
 				}

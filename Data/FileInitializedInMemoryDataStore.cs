@@ -41,8 +41,8 @@ namespace Data
             var filtered = hotels.Where(p => String.Compare(p.City, city, true) == 0);
             switch(sort)
             {
-                case SortOrder.PriceAscending: filtered = filtered.OrderBy(p => p.Price); break;
-                case SortOrder.PriceDescending: filtered = filtered.OrderByDescending(p => p.Price); break;
+                case SortOrder.Asc: filtered = filtered.OrderBy(p => p.Price); break;
+                case SortOrder.Dsc: filtered = filtered.OrderByDescending(p => p.Price); break;
                 default: break;
             }
 

@@ -9,8 +9,22 @@ namespace Data.Models
     public enum SortOrder
     {
         Undefined = 0,
-        PriceAscending = 1,
-        PriceDescending = 2
+        Asc = 1,
+        Dsc = 2
+    }
 
+    public static class SortOrderExtensions
+    {
+        public static SortOrder ToSortOrder(this string sort)
+        {
+            SortOrder sorting = SortOrder.Undefined;
+            if (!Enum.TryParse<SortOrder>(sort, true, out sorting))
+            {
+                sorting = SortOrder.Undefined;
+            }
+
+            return sorting;
+            
+        }
     }
 }

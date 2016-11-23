@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Api.Configuration;
+using System;
 using System.Configuration;
 
 namespace Api
@@ -33,5 +34,13 @@ namespace Api
 
 		}
 
-	}
+        public static ApiKeysSection ApiKeys
+        {
+            get
+            {
+                return ConfigurationManager.GetSection("ApiKeys") as ApiKeysSection;
+            }
+        }
+
+    }
 }

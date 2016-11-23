@@ -18,14 +18,11 @@ namespace Api.Controllers
             this.dataStore = dataStore;
         }
 		[HttpGet]        
-		[Route("search/{city}/{sort}")]
+		[Route("search/{city}/{sort?}")]
 		public IHttpActionResult SearchHotels(string city, string sort)
 		{
-            SortOrder sorting;
-			if (!Enum.TryParse<SortOrder>(sort, out sorting))
-            {
-                sorting = SortOrder.Undefined;
-            }
+            SortOrder sorting = sort.ToSortOrder();
+			
             return Ok(this.dataStore.Search(city, sorting));            
 		}
     }
