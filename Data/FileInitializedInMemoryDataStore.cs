@@ -38,7 +38,7 @@ namespace Data
 
         public List<HotelInfo> Search(string city, SortOrder sort)
         {
-            var filtered = hotels.Where(p => String.Compare(p.City, city, true) == 0);
+			var filtered = hotels.Where(p => String.IsNullOrWhiteSpace(city) || String.Compare(p.City, city, true) == 0);
             switch(sort)
             {
                 case SortOrder.Asc: filtered = filtered.OrderBy(p => p.Price); break;
