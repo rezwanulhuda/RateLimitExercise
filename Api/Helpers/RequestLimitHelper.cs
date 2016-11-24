@@ -6,7 +6,7 @@ namespace Api
 {
 	public static class RequestLimitHelper
 	{
-		public static KeyLimitTracker GlobalTracker = null;
+		public static KeyLimitTracker GlobalTracker { get; private set; }
 		static RequestLimitHelper()
 		{
 			GlobalTracker = new KeyLimitTracker(ConfigHelper.DefaultNrOfRequests, ConfigHelper.DefaultAllowedTime, ConfigHelper.DefaultSuspendTime);

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Data.Models;
 using System.IO;
 using CsvHelper;
@@ -12,7 +10,7 @@ namespace Data
 {
     public class FileInitializedInMemoryDataStore : IDataStore
     {
-        public sealed class HotelInfoMap : CsvClassMap<HotelInfo>
+        private sealed class HotelInfoMap : CsvClassMap<HotelInfo>
         {
             public HotelInfoMap()
             {

@@ -20,7 +20,7 @@ namespace Api
             GlobalConfiguration.Configure(WebApiConfig.Register);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			GlobalConfiguration.Configuration.Filters.Add(new RateLimitFilterAttribute());
-            DataStoreHelper.LoadFromFile();
+            DataStoreHelper.Load();
 
 
         }

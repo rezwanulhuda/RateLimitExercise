@@ -11,7 +11,7 @@ namespace Api.Helpers
 {
     public static class DataStoreHelper
     {
-        public static IDataStore GlobalDataStore = null;
+        public static IDataStore GlobalDataStore { get; private set; }
 
         private static void CopyStream(Stream input, Stream output)
         {
@@ -24,7 +24,7 @@ namespace Api.Helpers
             }
         }
 
-        public static void LoadFromFile()
+        public static void Load()
         {
             using (Stream input = Assembly.GetExecutingAssembly().GetManifestResourceStream(@"Api.DataFile.hoteldb.csv"))
             {
