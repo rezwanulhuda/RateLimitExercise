@@ -15,7 +15,7 @@ namespace Lib.Tests
 			int allowedTime = 1;
 
 			KeyLimitTracker tracker = new KeyLimitTracker(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(waitTime));
-			//tracker.Track("key1");
+            			
 			Assert.IsFalse(tracker.IsTracking("key1"));
 		}
 
@@ -97,7 +97,7 @@ namespace Lib.Tests
 			int allowedTime = 1;
 
 			KeyLimitTracker tracker = new KeyLimitTracker(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(waitTime));
-			tracker.AddKey("key1", 2, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+			tracker.AddKey("key1", 2);
 			Assert.IsTrue(tracker.IsTracking("key1"));
 
 

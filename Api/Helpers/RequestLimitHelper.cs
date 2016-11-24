@@ -13,7 +13,7 @@ namespace Api
             var k = ConfigHelper.ApiKeys;
             foreach (ApiKeyElement item in k.Instances)
             {
-                GlobalTracker.AddKey(item.Key, item.RequestLimits, ConfigHelper.DefaultAllowedTime, ConfigHelper.DefaultSuspendTime);
+                GlobalTracker.AddKey(item.Key, item.RequestLimits);
             }
         }
 	}

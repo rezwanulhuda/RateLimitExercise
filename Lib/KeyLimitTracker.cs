@@ -5,9 +5,9 @@ namespace Lib
 {
 	public class KeyLimitTracker
 	{
-		int nrOfRequests;
-		TimeSpan defaultAllowedTime;
-		TimeSpan defaultSuspendUntil;
+		private readonly int nrOfRequests;
+		private readonly TimeSpan defaultAllowedTime;
+		private readonly TimeSpan defaultSuspendTime;
 
 		Dictionary<string, ILimitCounter> items = new Dictionary<string, ILimitCounter>();
 
@@ -18,14 +18,20 @@ namespace Lib
 			
 			if (!items.ContainsKey(key))
 			{
-				this.AddKey(key, this.nrOfRequests, this.defaultAllowedTime, this.defaultSuspendUntil);
+				this.AddKey(key, this.nrOfRequests, this.defaultAllowedTime, this.defaultSuspendTime);
 			}
 			items[key].Increase();
 
 
 		}
 
-		public void AddKey(string key, int nrOfRequests, TimeSpan allowedTime, TimeSpan suspendUntil)
+        public void AddKey(string key, int nrOfRequests)
+        {
+            this.AddKey(key, nrOfRequests, this.defaultAllowedTime, this.defaultSuspendTime);
+            
+        }
+
+        private void AddKey(string key, int nrOfRequests, TimeSpan allowedTime, TimeSpan suspendTime)
 		{
 			
 			if (!items.ContainsKey(key))
@@ -34,18 +40,18 @@ namespace Lib
 				{
                     if (!items.ContainsKey(key))
                     {
-                        var counter = new LimitCounter(nrOfRequests, allowedTime, suspendUntil);
+                        var counter = new LimitCounter(nrOfRequests, allowedTime, suspendTime);
                         items.Add(key, counter);
                     }                        
 				}
 			}
 		}
 
-		public KeyLimitTracker(int nrOfRequests, TimeSpan defaultAllowedTime, TimeSpan defaultSuspendUntil)
+		public KeyLimitTracker(int nrOfRequests, TimeSpan defaultAllowedTime, TimeSpan defaultSuspendTime)
 		{
 			this.nrOfRequests = nrOfRequests;
 			this.defaultAllowedTime = defaultAllowedTime;
-			this.defaultSuspendUntil = defaultSuspendUntil;
+			this.defaultSuspendTime = defaultSuspendTime;
 		}
 
 		public bool IsTracking(string key)
