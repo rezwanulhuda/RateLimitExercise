@@ -12,8 +12,7 @@ namespace Lib.Tests
 			int nrOfRequests = 1;
 			int allowedTime = 1;
 			int secondsSuspended = 5;
-
-			//nrOfRequests, seconds, minutesSuspended
+			
 			LimitCounter counter = new LimitCounter(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(secondsSuspended));
 
 			counter.Increase();
