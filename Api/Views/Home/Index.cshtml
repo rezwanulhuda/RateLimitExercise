@@ -1,1 +1,10 @@
-﻿<h2>Welcome to ASP.NET MVC @ViewData["Version"] on @ViewData["Runtime"]!</h2>
+﻿<h2>Welcome!</h2>
+<h3>The following services are available:</h3>
+    
+<p>http://[site]/api/key/search - returns all hotels</p>
+<p>http://[site]/api/key/search/asc - returns all in ascending order</p>
+<p>http://[site]/api/key/search/dsc - returns all in descending order</p>
+<p>http://[site]/api/key/search/{city} - returns all hotels in city</p>
+<p>http://[site]/api/key/search/{city}/asc - returns all hotels in city in ascending order of price</p>
+<p>http://[site]/api/key/search/{city}/dsc - returns all hotels in city in descending order of price</p>
+<p>Keys can be configured in web.config. If a key is not present in the web config, it's added at the time of first request with default values.</p>
