@@ -1,8 +1,8 @@
 ﻿using System;
 namespace Lib
 {
-	public class LimitCounter : ILimitCounterStateFactory, ILimitCounter
-	{
+	public class LimitCounter : ILimitCounter, ILimitCounterStateFactory
+    {
 		private readonly TimeSpan allowedTime;
 		private readonly int nrOfRequests;
 		private readonly TimeSpan suspendedFor;

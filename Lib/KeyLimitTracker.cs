@@ -9,7 +9,7 @@ namespace Lib
 		TimeSpan defaultAllowedTime;
 		TimeSpan defaultSuspendUntil;
 
-		Dictionary<string, LimitCounter> items = new Dictionary<string, LimitCounter>();
+		Dictionary<string, ILimitCounter> items = new Dictionary<string, ILimitCounter>();
 
 		private static object locker = new object();
 
