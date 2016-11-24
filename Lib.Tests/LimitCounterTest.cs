@@ -71,7 +71,7 @@ namespace Lib.Tests
             {
             }
 
-            System.Threading.Thread.Sleep(900);
+            System.Threading.Thread.Sleep(990);
 
             try
             {
@@ -102,7 +102,7 @@ namespace Lib.Tests
             {
             }
 
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(2000);
             			
 			counter.Increase();
 			
@@ -112,7 +112,7 @@ namespace Lib.Tests
 
 
 		[Test()]
-		public void Increase_WhenLimitDidNotExceed_AllowsAfterWaitTime()
+		public void Increase_WhenLimitDidNotExceed_AllowsAfterAllowedTime()
 		{
 			int nrOfRequests = 2;
 			int allowedTime = 1;

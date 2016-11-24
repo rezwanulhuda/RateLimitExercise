@@ -35,7 +35,7 @@ namespace Lib
 
 		public ILimitCounterState GetNewSuspendedState()
 		{
-			return new SuspendedState(this, this.nrOfRequests, this.allowedTime.Add(this.suspendedFor));
+			return new SuspendedState(this, this.nrOfRequests, this.suspendedFor);
 		}
 	}
 }

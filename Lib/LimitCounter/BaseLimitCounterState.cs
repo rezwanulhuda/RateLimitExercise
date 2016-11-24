@@ -25,7 +25,7 @@ namespace Lib
 		{
 			var timeNow = DateTime.Now;
 			var diff = timeNow.Subtract(this.stateStart);
-			return diff.TotalSeconds > lifeSpan.TotalSeconds;
+			return diff.TotalMilliseconds > lifeSpan.TotalMilliseconds;
 
 		}
 	}
