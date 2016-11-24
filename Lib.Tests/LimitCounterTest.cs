@@ -5,38 +5,7 @@ namespace Lib.Tests
 	[TestFixture()]
 	public class LimitCounterTest
 	{
-		[Test()]
-		public void CurrentCount_Returns0_WhenCalledAfterInitializing()
-		{
-			int nrOfRequests = 0;
-			int allowedTime = 0;
-			int secondsSuspended = 0;
-
-			//nrOfRequests, seconds, minutesSuspended
-			LimitCounter counter = new LimitCounter(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(secondsSuspended));
-
-
-			Assert.AreEqual(0, counter.CurrentCount);
-
-
-		}
-
-		[Test()]
-		public void Increase_IncreasesCurrentCounterBy1()
-		{
-			int nrOfRequests = 1;
-			int allowedTime = 1;
-			int secondsSuspended = 5;
-
-			//nrOfRequests, seconds, minutesSuspended
-			LimitCounter counter = new LimitCounter(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(secondsSuspended));
-
-			counter.Increase();
-			Assert.AreEqual(1, counter.CurrentCount);
-
-
-		}
-
+		
 		[Test()]
 		public void Increase_WhenLimitExceeds_ThrowsException()
 		{
@@ -48,7 +17,7 @@ namespace Lib.Tests
 			LimitCounter counter = new LimitCounter(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(secondsSuspended));
 
 			counter.Increase();
-			Assert.AreEqual(1, counter.CurrentCount);
+            			
 			try
 			{
 				counter.Increase();
@@ -58,54 +27,61 @@ namespace Lib.Tests
 			{				
 			}
 		}
-
+        
         [Test()]
-        public void Increase_WhenLimitDidNotExceed_ResetsCounterAfterElapsedTime()
-        {
-            int nrOfRequests = 1;
-            int allowedTime = 1;
-            int secondsSuspended = 1;
-
-            //nrOfRequests, seconds, minutesSuspended
-            LimitCounter counter = new LimitCounter(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(secondsSuspended));
-
-            counter.Increase();
-            System.Threading.Thread.Sleep(1000);
-            counter.Increase();
-            Assert.AreEqual(1, counter.CurrentCount);
-        }
-
-
-        [Test()]
-		public void Increase_WhenLimitExceeds_AllowsRequestAfterElapsedTime()
+		public void Increase_WhenLimitExceeds_ThrowsExceptionDuringWaitTime()
 		{
 			int nrOfRequests = 1;
 			int allowedTime = 1;
-			int secondsSuspended = 1;
-
-			//nrOfRequests, seconds, minutesSuspended
+			int secondsSuspended = 3;
+			
 			LimitCounter counter = new LimitCounter(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(secondsSuspended));
 
 			counter.Increase();
-			System.Threading.Thread.Sleep(2000);
-			counter.Increase();
-		}
 
-		[Test()]
-		public void Increase_WhenTimeElapsedButLimitStillExists_ResetsCounter()
-		{
-			int nrOfRequests = 2;
-			int allowedTime = 1;
-			int secondsSuspended = 1;
+            try
+            {
+                counter.Increase();
+                Assert.Fail("Did not throw exception after exceeding limit");
+            }
+            catch (RateLimitExceededException)
+            {
 
-			//nrOfRequests, seconds, minutesSuspended
-			LimitCounter counter = new LimitCounter(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(secondsSuspended));
+            }
 
-			counter.Increase();
-			System.Threading.Thread.Sleep(1000);
-			counter.Increase();
-			Assert.AreEqual(1, counter.CurrentCount);
-		}
+            System.Threading.Thread.Sleep(1000);
+
+            try
+            {
+                counter.Increase();
+                Assert.Fail("Did not throw exception after 1 second of waiting");
+            }
+            catch (RateLimitExceededException)
+            {
+            }
+
+            System.Threading.Thread.Sleep(1000);
+
+            try
+            {
+                counter.Increase();
+                Assert.Fail("Did not throw exception after 2 seconds of waiting");
+            }
+            catch (RateLimitExceededException)
+            {
+            }
+
+            System.Threading.Thread.Sleep(900);
+
+            try
+            {
+                counter.Increase();
+                Assert.Fail("Did not throw exception after 2 seconds of waiting");
+            }
+            catch (RateLimitExceededException)
+            {
+            }
+        }        
 
 		[Test()]
 		public void Increase_WhenLimitExceeds_AllowsAfterWaitTime()
@@ -126,27 +102,17 @@ namespace Lib.Tests
             {
             }
 
-            System.Threading.Thread.Sleep(1000);
-			try
-			{
-				counter.Increase();
-				Assert.Fail("Did not throw second time");
-			}
-            catch (RateLimitExceededException)
-            {
-            }
-
-            System.Threading.Thread.Sleep(2000);
-
+            System.Threading.Thread.Sleep(3000);
+            			
 			counter.Increase();
-			Assert.AreEqual(1, counter.CurrentCount);
+			
 
 		}
 
 
 
 		[Test()]
-		public void Increase_WhenLimitAtPar_AllowsAfterWaitTime()
+		public void Increase_WhenLimitDidNotExceed_AllowsAfterWaitTime()
 		{
 			int nrOfRequests = 2;
 			int allowedTime = 1;
@@ -156,31 +122,10 @@ namespace Lib.Tests
 
 			counter.Increase();
 			counter.Increase();
-			try
-			{
-				counter.Increase();
-				Assert.Fail("did not throw");
-			}
-            catch (RateLimitExceededException)
-            {
-            }
+			
+            System.Threading.Thread.Sleep(1000);
 
-            System.Threading.Thread.Sleep(3000);
-
-			try
-			{
-				counter.Increase();
-				Assert.Fail("Did not throw");
-			}
-            catch (RateLimitExceededException)
-            {
-            }
-
-            //System.Threading.Thread.Sleep(1000);
-
-            //counter.Increase();
-            //Assert.AreEqual(1, counter.CurrentCount);
-
+            counter.Increase();
         }
 
 

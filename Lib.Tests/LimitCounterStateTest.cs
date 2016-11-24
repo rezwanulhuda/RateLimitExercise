@@ -10,7 +10,7 @@ namespace Lib.Tests
 {
 
     [TestFixture]
-    public class ValidStateTest
+    public class LimitCounterStateTest
     {
 
         [TestCase]
@@ -51,13 +51,12 @@ namespace Lib.Tests
             var state = factoryMock.Object.GetNewValidState();
             state.PerformStateOperation();
             System.Threading.Thread.Sleep(1000);
-            Assert.AreEqual(1, state.CurrentCount);
+            Assert.AreEqual(1, (state as ValidState).CurrentCount);
             var next = state.Next();
-            Assert.AreNotSame(state, next);
-                        
-            Assert.AreEqual(0, next.CurrentCount);
+            Assert.AreNotSame(state, next);                                    
             Assert.IsInstanceOf<ValidState>(next);
-            
+            Assert.AreEqual(0, (next as ValidState).CurrentCount);
+
         }
 
         [TestCase]
@@ -79,6 +78,56 @@ namespace Lib.Tests
 
             next = state.Next();
             Assert.IsInstanceOf<SuspendedState>(next);
+        }
+
+        [TestCase]
+        public void PerformStateOperation_WhenSuspendedState_ThrowsLimitExceededException()
+        {
+            Mock<ILimitCounterStateFactory> factoryMock = new Mock<ILimitCounterStateFactory>();
+            factoryMock.Setup(p => p.GetNewValidState()).Returns(() => new ValidState(factoryMock.Object, 2, TimeSpan.FromSeconds(1)));
+            factoryMock.Setup(p => p.GetNewSuspendedState()).Returns(() => new SuspendedState(factoryMock.Object, 2, TimeSpan.FromSeconds(1)));
+
+            var state = factoryMock.Object.GetNewSuspendedState();
+
+            try
+            {
+                state.PerformStateOperation();
+                Assert.Fail("Did not throw rate limit exceeded exception");
+            }
+            catch (RateLimitExceededException)
+            {
+
+            }
+        }
+
+        [TestCase]
+        public void Next_WhenSuspendedStateExpired_ReturnsNewValidState()
+        {
+            Mock<ILimitCounterStateFactory> factoryMock = new Mock<ILimitCounterStateFactory>();
+            factoryMock.Setup(p => p.GetNewValidState()).Returns(() => new ValidState(factoryMock.Object, 2, TimeSpan.FromSeconds(1)));
+            factoryMock.Setup(p => p.GetNewSuspendedState()).Returns(() => new SuspendedState(factoryMock.Object, 2, TimeSpan.FromSeconds(1)));
+
+            var state = factoryMock.Object.GetNewSuspendedState();
+
+            System.Threading.Thread.Sleep(1000);
+
+            var next = state.Next();
+            Assert.AreNotSame(state, next);
+            Assert.IsInstanceOf<ValidState>(next);
+            Assert.AreEqual(0, (next as ValidState).CurrentCount);
+        }
+
+        [TestCase]
+        public void Next_WhenSuspendedStateNotExpired_ReturnsSameState()
+        {
+            Mock<ILimitCounterStateFactory> factoryMock = new Mock<ILimitCounterStateFactory>();
+            factoryMock.Setup(p => p.GetNewValidState()).Returns(() => new ValidState(factoryMock.Object, 2, TimeSpan.FromSeconds(1)));
+            factoryMock.Setup(p => p.GetNewSuspendedState()).Returns(() => new SuspendedState(factoryMock.Object, 2, TimeSpan.FromSeconds(1)));
+
+            var state = factoryMock.Object.GetNewSuspendedState();            
+            var next = state.Next();
+
+            Assert.AreSame(state, next);            
         }
     }
 }

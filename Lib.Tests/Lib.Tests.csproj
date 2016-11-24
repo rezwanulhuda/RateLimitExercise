@@ -42,7 +42,7 @@
     <Compile Include="ExtensionMethodsTest.cs" />
     <Compile Include="LimitCounterTest.cs" />
     <Compile Include="KeyLimitTrackerTest.cs" />
-    <Compile Include="ValidStateTest.cs" />
+    <Compile Include="LimitCounterStateTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

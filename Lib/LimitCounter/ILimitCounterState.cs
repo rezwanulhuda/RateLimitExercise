@@ -3,8 +3,7 @@ namespace Lib
 {
 	public interface ILimitCounterState
 	{
-		ILimitCounterState Next();
-		int CurrentCount { get; }
+		ILimitCounterState Next();		
 		void PerformStateOperation();
 	}
 }

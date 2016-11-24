@@ -9,13 +9,7 @@ namespace Lib
 
 		ILimitCounterState state;
 
-		public int CurrentCount { 
-			get 
-			{
-				return this.state.CurrentCount;
-			} 
-		}
-
+		
 		public LimitCounter(int nrOfRequests, TimeSpan allowedTime, TimeSpan suspendFor)
 		{
 			this.nrOfRequests = nrOfRequests;
