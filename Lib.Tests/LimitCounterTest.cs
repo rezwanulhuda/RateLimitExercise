@@ -37,10 +37,15 @@ namespace Lib.Tests
 			LimitCounter counter = new LimitCounter(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(secondsSuspended));
 
 			counter.Increase();
-
+			DateTime t1 = DateTime.MinValue;
+			DateTime t2 = DateTime.MinValue;
+			DateTime t3 = DateTime.MinValue;
+			DateTime t4 = DateTime.MinValue;
             try
             {
+				//t1 = DateTime.Now;
                 counter.Increase();
+				//t2 = DateTime.Now;
                 Assert.Fail("Did not throw exception after exceeding limit");
             }
             catch (RateLimitExceededException)
@@ -70,16 +75,25 @@ namespace Lib.Tests
             {
             }
 
-            System.Threading.Thread.Sleep(990);
+            System.Threading.Thread.Sleep(985);
 
             try
             {
-                counter.Increase();
-                Assert.Fail("Did not throw exception after 2 seconds of waiting");
+                //t3 = DateTime.Now;
+				counter.Increase();
+                Assert.Fail("Did not throw exception after 3 seconds of waiting");
             }
             catch (RateLimitExceededException)
             {
             }
+
+//			t4 = DateTime.Now;
+
+//			Console.WriteLine(String.Format(@"{0}
+//{1}
+//{2}
+//{3}", t1, t2, t3, t4));
+
         }        
 
 		[Test()]
