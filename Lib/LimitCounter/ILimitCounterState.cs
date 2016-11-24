@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Lib
 {
-	public interface ILimitCounterState
+	internal interface ILimitCounterState
 	{
 		ILimitCounterState Next();		
 		void PerformStateOperation();

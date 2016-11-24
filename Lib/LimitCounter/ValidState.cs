@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Lib
 {
-	public class ValidState : BaseCounterState
+	internal class ValidState : BaseCounterState
 	{
 		private readonly int limit;
 		private int currentCount;

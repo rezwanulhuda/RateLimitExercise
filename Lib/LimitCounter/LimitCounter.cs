@@ -1,13 +1,13 @@
 ﻿using System;
 namespace Lib
 {
-	public class LimitCounter : ILimitCounterStateFactory
+	public class LimitCounter : ILimitCounterStateFactory, ILimitCounter
 	{
 		private readonly TimeSpan allowedTime;
 		private readonly int nrOfRequests;
 		private readonly TimeSpan suspendedFor;
 
-		ILimitCounterState state;
+		private ILimitCounterState state;
 
 		
 		public LimitCounter(int nrOfRequests, TimeSpan allowedTime, TimeSpan suspendFor)
@@ -16,7 +16,7 @@ namespace Lib
 			this.allowedTime = allowedTime;
 			this.suspendedFor = suspendFor;
 
-			this.state = this.GetNewValidState();
+			this.state = (this as ILimitCounterStateFactory).GetNewValidState();
 		}
 
 
@@ -27,15 +27,16 @@ namespace Lib
 			this.state.PerformStateOperation();
             
 		}
+        
 
-		public ILimitCounterState GetNewValidState()
-		{
-			return new ValidState(this, this.nrOfRequests, this.allowedTime);
-		}
+        ILimitCounterState ILimitCounterStateFactory.GetNewValidState()
+        {
+            return new ValidState(this, this.nrOfRequests, this.allowedTime);
+        }
 
-		public ILimitCounterState GetNewSuspendedState()
-		{
-			return new SuspendedState(this, this.nrOfRequests, this.suspendedFor);
-		}
-	}
+        ILimitCounterState ILimitCounterStateFactory.GetNewSuspendedState()
+        {
+            return new SuspendedState(this, this.nrOfRequests, this.suspendedFor);
+        }
+    }
 }

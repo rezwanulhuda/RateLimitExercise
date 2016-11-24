@@ -12,6 +12,8 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyCopyright("rezwanulhuda")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+[assembly: InternalsVisibleToAttribute("Lib.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,

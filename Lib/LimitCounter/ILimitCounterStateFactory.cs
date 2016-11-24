@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Lib
 {
-	public interface ILimitCounterStateFactory
+    internal interface ILimitCounterStateFactory
 	{
 		ILimitCounterState GetNewValidState();
 		ILimitCounterState GetNewSuspendedState();

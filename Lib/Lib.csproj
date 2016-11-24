@@ -31,6 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="LimitCounter\ILimitCounter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KeyLimitTracker.cs" />
     <Compile Include="RateLimitExceededException.cs" />
@@ -41,8 +42,6 @@
     <Compile Include="LimitCounter\ValidState.cs" />
     <Compile Include="LimitCounter\SuspendedState.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LimitCounter\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

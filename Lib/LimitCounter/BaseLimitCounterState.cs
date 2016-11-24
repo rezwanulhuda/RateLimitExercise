@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Lib
 {
-	public abstract class BaseCounterState : ILimitCounterState
+    internal abstract class BaseCounterState : ILimitCounterState
 	{
 		protected DateTime stateStart;
 		protected ILimitCounterStateFactory stateFactory;

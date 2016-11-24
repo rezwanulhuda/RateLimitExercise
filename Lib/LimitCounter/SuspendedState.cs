@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Lib
 {
-	public class SuspendedState : BaseCounterState
+	internal class SuspendedState : BaseCounterState
 	{
 		private readonly int limit;
 
