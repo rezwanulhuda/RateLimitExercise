@@ -13,14 +13,6 @@ namespace Lib
 			this.statefactory = statefactory;
 		}
 
-		public override int CurrentCount
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public override void PerformStateOperation()
 		{
 			throw new RateLimitExceededException(this.limit, this.lifeSpan.Subtract(DateTime.Now.Subtract(stateStart)));

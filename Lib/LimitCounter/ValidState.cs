@@ -11,7 +11,7 @@ namespace Lib
 			this.limit = limit;
 		}
 
-		public override int CurrentCount
+		public int CurrentCount
 		{
 			get
 			{

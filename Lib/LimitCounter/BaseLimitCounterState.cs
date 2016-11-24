@@ -14,9 +14,7 @@ namespace Lib
 			this.lifeSpan = lifeSpan;
 		}
 
-		public abstract int CurrentCount { get; }
-
-
+		
 		public abstract void PerformStateOperation();
 
 		public abstract ILimitCounterState Next();
