@@ -5,6 +5,6 @@ namespace Lib
 	{
 		ILimitCounterState Next();
 		int CurrentCount { get; }
-		void CheckState();
+		void PerformStateOperation();
 	}
 }

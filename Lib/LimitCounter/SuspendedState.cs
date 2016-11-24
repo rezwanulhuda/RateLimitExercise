@@ -21,7 +21,7 @@ namespace Lib
 			}
 		}
 
-		public override void CheckState()
+		public override void PerformStateOperation()
 		{
 			throw new RateLimitExceededException(this.limit, this.lifeSpan.Subtract(DateTime.Now.Subtract(stateStart)));
 		}

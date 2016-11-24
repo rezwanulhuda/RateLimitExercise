@@ -19,7 +19,7 @@ namespace Lib
 			}
 		}
 
-		public override void CheckState()
+		public override void PerformStateOperation()
 		{
 			this.currentCount++;
 		}

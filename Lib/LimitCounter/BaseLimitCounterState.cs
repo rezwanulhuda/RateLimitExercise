@@ -17,7 +17,7 @@ namespace Lib
 		public abstract int CurrentCount { get; }
 
 
-		public abstract void CheckState();
+		public abstract void PerformStateOperation();
 
 		public abstract ILimitCounterState Next();
 

@@ -30,7 +30,7 @@ namespace Lib
 		public void Increase()
 		{
 			this.state = this.state.Next();
-			this.state.CheckState();
+			this.state.PerformStateOperation();
             
 		}
 

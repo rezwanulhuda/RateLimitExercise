@@ -56,12 +56,8 @@ namespace Lib.Tests
 			{
 				tracker.Track("key1");
 				Assert.Fail("did not throw exception");
-			}
-			catch (NUnit.Framework.AssertionException e)
-			{
-				throw e;
-			}
-			catch (Exception ex)
+			}			
+			catch (RateLimitExceededException ex)
 			{
 				Assert.IsTrue(ex.Message.Contains("requests exceeded."));
 			}
@@ -82,13 +78,10 @@ namespace Lib.Tests
 				tracker.Track("key1");
 				Assert.Fail("did not throw exception for key1");
 			}
-			catch (NUnit.Framework.AssertionException e)
-			{
-				throw e;
-			}
-			catch
-			{				
-			}
+            catch (RateLimitExceededException ex)
+            {
+                Assert.IsTrue(ex.Message.Contains("requests exceeded."));
+            }
 
 			tracker.Track("key2");
 			tracker.Track("key2");
