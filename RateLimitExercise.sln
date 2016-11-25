@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "Lib\Lib.csproj", "{F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Tests", "Lib.Tests\Lib.Tests.csproj", "{5E210B10-02B1-47FE-9A37-C052F41F7C5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiThreadedTests", "MultiThreadedTests\MultiThreadedTests.csproj", "{1A9D104C-C1A0-4A76-AEEE-091EA4745CB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{5E210B10-02B1-47FE-9A37-C052F41F7C5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E210B10-02B1-47FE-9A37-C052F41F7C5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E210B10-02B1-47FE-9A37-C052F41F7C5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A9D104C-C1A0-4A76-AEEE-091EA4745CB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A9D104C-C1A0-4A76-AEEE-091EA4745CB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A9D104C-C1A0-4A76-AEEE-091EA4745CB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A9D104C-C1A0-4A76-AEEE-091EA4745CB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
