@@ -14,7 +14,8 @@ namespace Lib
 
             if (span.Hours > 0)
             {
-                output += span.ToString("%h") + " hours";
+                output += span.ToString("%h") + " hour";
+				if (span.Hours > 1) output += "s";
             }
 
             if (span.Minutes > 0)
@@ -23,7 +24,8 @@ namespace Lib
                 {
                     output += ", ";
                 }
-                output += span.ToString("%m") + " minutes";
+                output += span.ToString("%m") + " minute";
+				if (span.Minutes > 1) output += "s";
             }
 
             
@@ -33,8 +35,15 @@ namespace Lib
                 {
                     output += ", ";
                 }
-                output += span.ToString("%s") + " seconds";
+                output += span.ToString("%s") + " second";
+				if (span.Seconds > 1) output += "s";
             }
+
+			if (String.IsNullOrWhiteSpace(output))
+			{
+				output = "1 second";
+			}
+
 
             return output;
         }

@@ -8,6 +8,7 @@ namespace Lib
 		private readonly TimeSpan suspendedFor;
 
 		private ILimitCounterState state;
+		private static object locker = new object();
 
 		
 		public LimitCounter(int nrOfRequests, TimeSpan allowedTime, TimeSpan suspendFor)
@@ -23,8 +24,12 @@ namespace Lib
 
 		public void Increase()
 		{
-			this.state = this.state.Next();
-			this.state.PerformStateOperation();
+			lock(locker)
+			{
+				this.state = this.state.Next();
+				this.state.PerformStateOperation();
+			}
+
             
 		}
         

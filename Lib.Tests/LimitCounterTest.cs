@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Collections.Generic;
+
 namespace Lib.Tests
 {
 	[TestFixture()]
@@ -37,10 +39,7 @@ namespace Lib.Tests
 			LimitCounter counter = new LimitCounter(nrOfRequests, TimeSpan.FromSeconds(allowedTime), TimeSpan.FromSeconds(secondsSuspended));
 
 			counter.Increase();
-			DateTime t1 = DateTime.MinValue;
-			DateTime t2 = DateTime.MinValue;
-			DateTime t3 = DateTime.MinValue;
-			DateTime t4 = DateTime.MinValue;
+
             try
             {
 				//t1 = DateTime.Now;
@@ -86,14 +85,6 @@ namespace Lib.Tests
             catch (RateLimitExceededException)
             {
             }
-
-//			t4 = DateTime.Now;
-
-//			Console.WriteLine(String.Format(@"{0}
-//{1}
-//{2}
-//{3}", t1, t2, t3, t4));
-
         }        
 
 		[Test()]
@@ -140,7 +131,5 @@ namespace Lib.Tests
 
             counter.Increase();
         }
-
-
 	}
 }
